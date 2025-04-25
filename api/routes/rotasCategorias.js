@@ -2,16 +2,16 @@ import { BD } from '../db.js'
 
 class rotasCategorias{
     static async novaCategoria(req,res){
-        const { nome, tipo_transacao, gasto_fixo, id_usuario } = req.body;
+        const { nome, tipo_transacao, gasto_fixo, id_usuario, cor, icone } = req.body;
 
-        if (!nome || !tipo_transacao || !gasto_fixo  || !id_usuario){
+        if (!nome || !tipo_transacao || !gasto_fixo  || !id_usuario || !cor || !icone){
             return res.status(400).json({message: 'Campos obrigatórios não preenchidos'})
         }
         // if (!nome || !tipo_transacao || !gasto_fixo === undefined || !id_usuario){
         //     return res.status(400).json({message: 'Campos obrigatórios não preenchidos'})
         // }
         try{
-            const query = `INSERT INTO categorias(nome, tipo_transacao, gasto_fixo, id_usuario) VALUES($1, $2, $3, $4)`
+            const query = `INSERT INTO categorias(nome, tipo_transacao, gasto_fixo, id_usuario, cor, icone) VALUES($1, $2, $3, $4, $5, $6)`
             const valores = [nome, tipo_transacao, gasto_fixo, id_usuario]
             const resposta = await BD.query(query, valores)
 
@@ -21,9 +21,34 @@ class rotasCategorias{
             res.status(500).json({message: 'Erro ao criar nova categoria', error: error.message})
         }
     }
+    // filtrar por tipo de categoria
+    static async filtrarCategoria(req, res){
+        // o valor sera enviado por parâmetro na url, deve ser enviado dessa maneira
+        // ?tipo_transacao=entrada
+        const { tipo_transacao } = req.query
+
+        try{
+            const filtros = [];
+            const valores = [];
+
+            if(tipo_transacao){
+                filtros.push(`tipo_transacao = $${valores.length + 1}`);
+                valores.push(tipo_transacao);
+            }
+            const query = `
+                SELECT * FROM  categorias
+                ${filtros.length ? `WHERE ${filtros.join(" AND ")}` : "" } and ativo = true
+                ORDER BY id_categoria DESC
+            `
+
+            const resultado = await BD.query(query, valores)
+        }catch(error){
+
+        }
+    }
     static async listarTodos(req, res){
         try{
-            const resultado = await BD.query( `SELECT id_categoria, nome, tipo_transacao, gasto_fixo, id_usuario from categorias`)
+            const resultado = await BD.query( `SELECT id_categoria, nome, tipo_transacao, gasto_fixo, id_usuario, cor, icone from categorias`)
             res.json({categorias: resultado.rows})
         }catch(error){
             res.status(500).json({message: 'Erro ao buscar categorias', error: error.message})
@@ -48,8 +73,8 @@ class rotasCategorias{
         const {nome, tipo_transacao, gasto_fixo,  ativo, id_usuario} = req.body
         try{
             const categoria = await BD.query(
-                'UPDATE categorias SET nome = $1, tipo_transacao = $2, gasto_fixo = $3, ativo = $4, id_usuario = $5 WHERE id_categoria = $6 RETURNING *',
-                [nome, tipo_transacao, gasto_fixo, ativo, id_usuario, id_categoria]
+                'UPDATE categorias SET nome = $1, tipo_transacao = $2, gasto_fixo = $3, ativo = $4, id_usuario = $5, cor = $6, icone = $7 WHERE id_categoria = $8 RETURNING *',
+                [nome, tipo_transacao, gasto_fixo, ativo, id_usuario,, cor, icone, id_categoria]
             )
             res.status(200).json(categoria.rows[0])
         }catch(error){
@@ -58,7 +83,7 @@ class rotasCategorias{
     }
     static async atualizar(req,res){
         const {id_categoria} = req.params
-        const {nome, tipo_transacao, gasto_fixo} = req.body
+        const {nome, tipo_transacao, gasto_fixo, id_usuario, cor, icone} = req.body
         try{
             const campos = []
             const valores = []
@@ -72,6 +97,15 @@ class rotasCategorias{
             }if(gasto_fixo !== undefined){
                 campos.push(`gasto_fixo = $${valores.length + 1}`)
                 valores.push(gasto_fixo)
+            }if(id_usuario !== undefined){
+                campos.push(`id_usuario = $${valores.length + 1}`)
+                valores.push(id_usuario)
+            }if(cor !== undefined){
+                campos.push(`cor = $${valores.length + 1}`)
+                valores.push(cor)
+            }if(icone !== undefined){
+                campos.push(`icone = $${valores.length + 1}`)
+                valores.push(icone)
             }
 
             valores.push(id_categoria)

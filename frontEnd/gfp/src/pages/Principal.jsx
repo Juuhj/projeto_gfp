@@ -1,5 +1,7 @@
+
 export default function Principal(){
     return(
-        <h1>Tela Principal</h1>
+        <h1 style={{textAlign:"center"}}>Tela Principal</h1>
+        
     )
 }

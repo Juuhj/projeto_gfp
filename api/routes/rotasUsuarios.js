@@ -32,7 +32,7 @@ class rotasUsuarios{
         const {email, senha} = req.body
         try{
             const resultado = await BD.query(
-                `SELECT id_usuario, nome, email, senha FROM usuarios WHERE email = $1`,[email]
+                `SELECT id_usuario, nome, email, senha FROM usuarios WHERE email = $1 and ativo = true`,[email]
             );
             if(resultado.rows.length === 0){
                 return res.status(401).json({message: 'Email ou senha inválidos'})
@@ -49,7 +49,11 @@ class rotasUsuarios{
                 {expiresIn: '1h'}
             )
 
-            return res.status(200).json({message: 'Login realizado com sucesso', token})
+            return res.status(200).json({token,
+                id_usuario: usuario.id_usuario,
+                nome: usuario.nome,
+                email: usuario.email,
+                tipo_acesso: usuario.tipo_acesso})
         }catch(error){
             console.error('Erro ao realizar login:', error)
             return res.status(500).json({message: 'Erro ao realizar login', error: error.message})
@@ -146,7 +150,7 @@ class rotasUsuarios{
 
 }
 export function autenticarToken(req, res, next){
-    const token = req.header['authorization'];
+    const token = req.headers['authorization'];
 
     if(!token) return res.status(403).json({message: 'Token não fornecido'})
     

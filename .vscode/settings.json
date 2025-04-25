@@ -1,0 +1,15 @@
+{
+    "animations.CursorAnimation": true,
+    "animations.Scrolling": "Fade",
+    "animations.Tabs": "Flip",
+    "animations.UseCursorColorForCursorAnimation": true,
+    "editor.cursorSmoothCaretAnimation": "explicit",
+    "animations.Active": "Indent",
+    "animations.Focus-Dimming-Mode": "Everything But Editor and Terminal",
+    "animations.CursorAnimationOptions": {
+        "TrailLength": 6,
+        "CursorStyle": "line",
+        "Color": "#00ffff"
+    },
+    "animations.Default-Duration": 400
+}
