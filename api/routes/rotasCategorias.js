@@ -12,7 +12,7 @@ class rotasCategorias{
         // }
         try{
             const query = `INSERT INTO categorias(nome, tipo_transacao, gasto_fixo, id_usuario, cor, icone) VALUES($1, $2, $3, $4, $5, $6)`
-            const valores = [nome, tipo_transacao, gasto_fixo, id_usuario]
+            const valores = [nome, tipo_transacao, gasto_fixo, id_usuario, cor, icone]
             const resposta = await BD.query(query, valores)
 
             res.status(201).json("Categoria criada")
@@ -48,7 +48,7 @@ class rotasCategorias{
     }
     static async listarTodos(req, res){
         try{
-            const resultado = await BD.query( `SELECT id_categoria, nome, tipo_transacao, gasto_fixo, id_usuario, cor, icone from categorias`)
+            const resultado = await BD.query( `SELECT id_categoria, nome, tipo_transacao, gasto_fixo, id_usuario, cor, icone from categorias WHERE ativo = true`)
             res.json({categorias: resultado.rows})
         }catch(error){
             res.status(500).json({message: 'Erro ao buscar categorias', error: error.message})
@@ -70,11 +70,11 @@ class rotasCategorias{
     }
     static async atualizarTodosCampos(req, res){
         const {id_categoria} = req.params
-        const {nome, tipo_transacao, gasto_fixo,  ativo, id_usuario} = req.body
+        const {nome, tipo_transacao, gasto_fixo,  ativo, id_usuario, cor, icone} = req.body
         try{
             const categoria = await BD.query(
                 'UPDATE categorias SET nome = $1, tipo_transacao = $2, gasto_fixo = $3, ativo = $4, id_usuario = $5, cor = $6, icone = $7 WHERE id_categoria = $8 RETURNING *',
-                [nome, tipo_transacao, gasto_fixo, ativo, id_usuario,, cor, icone, id_categoria]
+                [nome, tipo_transacao, gasto_fixo, ativo, id_usuario, cor, icone, id_categoria]
             )
             res.status(200).json(categoria.rows[0])
         }catch(error){
