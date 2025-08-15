@@ -18,7 +18,7 @@ class rotasUsuarios{
             //     `, [nome, email, senhaCriptografada, tipo_acesso])
 
             // Se der errado comenta e tenta o de cima !-!
-            const query = `INSERT INTO usuarios(nome, email, senha, tipo_acesso) VALUES($1, $2, $3, $4)`
+            const query = `INSERT INTO usuarios(nome, email, senha, k) VALUES($1, $2, $3, $4)`
             const valores = [nome, email, senhaCriptografada, tipo_acesso]
             const resposta = await BD.query(query, valores)
 

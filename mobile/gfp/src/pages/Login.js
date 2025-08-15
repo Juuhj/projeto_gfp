@@ -11,7 +11,7 @@ export default function Login({ navigation }) {
     const [senha, setSenha] = useState('');
     const [mensagem, setMensagem] = useState('');
 
-    async function botaoEntrar() {
+    async function botaoLogin() {
         try {
             if (email === "" || senha == "") {
                 throw new Error('Preencha todos os campos');
@@ -73,7 +73,7 @@ export default function Login({ navigation }) {
                     </TouchableOpacity>
                 {/* Botão Entrar */}
                 <View style={Estilos.linksContainer}></View>
-                    <TouchableOpacity style={Estilos.button} onPress={botaoEntrar}>
+                    <TouchableOpacity style={Estilos.button} onPress={botaoLogin}>
                         <Text style={Estilos.buttonText}>Entrar</Text>
                     </TouchableOpacity>
                 {/* <View /> */}

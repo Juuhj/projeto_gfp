@@ -1,8 +1,10 @@
 .login-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 1rem;
+    gap: 20px;
 }
 
 .login-box {
@@ -19,13 +21,10 @@
     margin-bottom: 10px;
 }
 
-h2 {
-    color: #503459;
-}
-
 .input-group {
     margin-bottom: 15px;
     text-align: left;
+    color: #333333
 }
 
 .input-group label {
@@ -42,7 +41,7 @@ h2 {
 
 .login-button {
     width: 100%;
-    background: #503459;
+    background: #2980B9;
     color: white;
     padding: 10px;
     border: none;
@@ -53,4 +52,127 @@ h2 {
 
 .login-button:hover {
     background: #b695c0;
+}
+
+.clear-button {
+  width: 100%;
+  background-color: #98D8B6; 
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.clear-button:hover {
+  background-color: #b695c0; 
+}
+
+/* TITULOS */
+h1, h2, h3 {
+  color: #503459; /* Roxo escuro para títulos */
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'Inter', sans-serif;
+}
+
+/* INPUTS e TEXTOS */
+body, p, label, input, button, a {
+/* p, label { */
+  color: #333333; /* Cinza escuro para o texto de inputs */
+  /* font-family: 'Roboto', sans-serif; */
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1Login {
+  color: #503459; /* Roxo escuro para títulos */
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'Inter', sans-serif;
+}
+
+
+
+.inputIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888; /* Icon color */
+  font-size: 1.2em;
+}
+
+.visibilityToggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #888;
+  font-size: 1.3em;
+  padding: 5px; /* Easier click target */
+  display: flex; /* Helps center icon */
+  align-items: center; /* Helps center icon */
+}
+
+.visibilityToggle:focus {
+    outline: none;
+}
+
+.between{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.forgotPassword {
+  font-size: 0.9em;
+  color: #2a6f97; /* Link blue color */
+  text-decoration: none;
+}
+
+.forgotPassword:hover {
+  text-decoration: underline;
+}
+
+.signupText {
+  font-size: 0.9em;
+  color: #666;
+  text-align: center;
+  margin: 0; /* Remove default paragraph margin */
+}
+
+.signupLink {
+  color: #2a6f97; /* Link blue color */
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.signupLink:hover {
+  text-decoration: underline;
+}
+
+.infoBoxes {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between info boxes */
+}
+
+.infoBox {
+  background-color: rgba(168, 29, 166, 0.1); /* Semi-transparent white */
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;  /* ou branco */
+  font-size: 0.95em;
+}
+
+.infoIcon {
+  font-size: 1.5em;
+  margin-right: 12px;
+  color: #ffffff; /* Or slightly different shade */
 }
