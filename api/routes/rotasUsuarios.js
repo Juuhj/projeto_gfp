@@ -162,6 +162,4 @@ export function autenticarToken(req, res, next){
     })
 }
 
-
-
 export default rotasUsuarios;

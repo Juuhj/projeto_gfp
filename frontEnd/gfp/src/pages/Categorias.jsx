@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UsuarioContext } from '../UsuarioContext'
 import { enderecoServidor } from './utils'
-import { MdAdd, MdEdit, MdDelete, MdCreditCard, MdAccountBalance, MdEmail, MdFeaturedPlayList, MdAttachMoney, MdAutoGraph } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom'
 import Estilos from '../styles/Estilos'
 
 export default function Contas() {
-    const { dadosUsuario, setDadosUsuario, carregando } = useContext(UsuarioContext);
-    const [dadosLista, setDadosLista] = useState([]);
-
+    
     const navigate = useNavigate();
 
     const iconesTipoConta = {

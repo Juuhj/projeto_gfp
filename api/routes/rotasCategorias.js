@@ -1,5 +1,7 @@
 import { BD } from '../db.js'
 
+const SECRET_KEY = 'chave_api_gfp';
+
 class rotasCategorias{
     static async novaCategoria(req,res){
         const { nome, tipo_transacao, gasto_fixo, id_usuario, cor, icone } = req.body;

@@ -93,14 +93,14 @@ function PaginaLogin() {
             <MdLock className="inputIcon" />
             <label>Senha</label>
             <input onChange={(e) => setSenha(e.target.value)} value={senha} type="password" placeholder="Digite sua senha" required />
-            <button
+            {/* <button
 							type="button"
 							onClick={togglePasswordVisibility}
 							className="visibilityToggle"
 							aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
 						>
 							{showPassword ? <MdVisibilityOff /> : <MdVisibility />}
-						</button>
+						</button> */}
           </div>
           
           <div className="between">

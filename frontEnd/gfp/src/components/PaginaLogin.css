@@ -22,6 +22,7 @@
 }
 
 .input-group {
+    position:relative;
     margin-bottom: 15px;
     text-align: left;
     color: #333333
@@ -34,7 +35,7 @@
 
 .input-group input {
     width: 100%;
-    padding: 8px;
+    padding: 8px 8px 8px 35px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
@@ -94,12 +95,13 @@ h1Login {
 
 .inputIcon {
   position: absolute;
-  left: 12px;
+  left: 10px;
   top: 50%;
-  transform: translateY(-50%);
-  color: #888; /* Icon color */
+  color: #888;
   font-size: 1.2em;
+  pointer-events: none; 
 }
+
 
 .visibilityToggle {
   position: absolute;
@@ -111,9 +113,9 @@ h1Login {
   cursor: pointer;
   color: #888;
   font-size: 1.3em;
-  padding: 5px; /* Easier click target */
-  display: flex; /* Helps center icon */
-  align-items: center; /* Helps center icon */
+  padding: 5px; 
+  display: flex;
+  align-items: center; 
 }
 
 .visibilityToggle:focus {
